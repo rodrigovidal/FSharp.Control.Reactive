@@ -78,10 +78,10 @@ module Builders =
         member __.Nth (s:IObservable<'a>,  index ) = s.ElementAt(index)
         [<CustomOperation("sumBy")>]
         member inline __.SumBy (s:IObservable<_>,[<ProjectionParameter>] valueSelector : _ -> _) = s.Select(valueSelector).Aggregate(Unchecked.defaultof<_>, new Func<_,_,_>( fun a b -> a + b)) 
-        [<CustomOperation("groupBy", AllowIntoPattern=true)>]
-        member __.GroupBy (s:IObservable<_>,[<ProjectionParameter>] keySelector : _ -> _) = s.GroupBy(new Func<_,_>(keySelector))
-        [<CustomOperation("groupValBy", AllowIntoPattern=true)>]
-        member __.GroupValBy (s:IObservable<_>,[<ProjectionParameter>] resultSelector : _ -> _,[<ProjectionParameter>] keySelector : _ -> _) = s.GroupBy(new Func<_,_>(keySelector),new Func<_,_>(resultSelector))
+//        [<CustomOperation("groupBy", AllowIntoPattern=true)>]
+//        member __.GroupBy (s:IObservable<_>,[<ProjectionParameter>] keySelector : _ -> _) = s.GroupBy(new Func<_,_>(keySelector))
+//        [<CustomOperation("groupValBy", AllowIntoPattern=true)>]
+//        member __.GroupValBy (s:IObservable<_>,[<ProjectionParameter>] resultSelector : _ -> _,[<ProjectionParameter>] keySelector : _ -> _) = s.GroupBy(new Func<_,_>(keySelector),new Func<_,_>(resultSelector))
         [<CustomOperation("join", IsLikeJoin=true)>]
         member __.Join (s1:IObservable<_>,s2:IObservable<_>, [<ProjectionParameter>] s1KeySelector : _ -> _,[<ProjectionParameter>] s2KeySelector : _ -> _,[<ProjectionParameter>] resultSelector : _ -> _) = s1.Join(s2,new Func<_,_>(s1KeySelector),new Func<_,_>(s2KeySelector),new Func<_,_,_>(resultSelector))
         [<CustomOperation("groupJoin", AllowIntoPattern=true)>]

@@ -109,7 +109,7 @@ Target "CleanDocs" (fun _ ->
 
 Target "Build" (fun _ ->
     !! solutionFile
-    |> MSBuildRelease "" "Rebuild"
+    |> MSBuildRelease "bin" "Rebuild"
     |> ignore
 )
 
